@@ -13,6 +13,9 @@ public class Chase : State
     {
         npc.transform.position = Vector3.MoveTowards(npc.transform.position, npc.player.transform.position, npc.moveSpeed * Time.deltaTime);
 
+        if (!npc.canSeePlayer()){
+            npc.SwitchState(npc.idle);
+        }
     }
 
     public override void OnCollisionEnter(StateManager npc, Collision collision)

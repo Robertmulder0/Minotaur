@@ -13,12 +13,19 @@ public class StateManager : MonoBehaviour
     public bool isStunned;
 
     public GameObject player;
+
+    public Material[] material;
+    Renderer rend;
     
     void Start()
     {
         currentState = idle;
 
         currentState.EnterState(this);
+
+        rend = GetComponent<Renderer>();
+        rend.enabled = true;
+        rend.sharedMaterial = material[0];
     }
 
     void OnCollisionEnter(Collision collision)
@@ -36,4 +43,28 @@ public class StateManager : MonoBehaviour
         currentState = state;
         state.EnterState(this);
     }
+
+    public void SwitchMat() //switch material when stunned
+    {
+        if (rend.sharedMaterial == material[1]){
+            rend.sharedMaterial = material[0];
+        } else {
+            rend.sharedMaterial = material[1];
+        }
+    }
+
+     public bool canSeePlayer()
+    {
+        Vector3 playerDir = (player.transform.position - transform.position).normalized;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, playerDir, out hit, Mathf.Infinity)) {
+            if (hit.transform.gameObject == player) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
 }

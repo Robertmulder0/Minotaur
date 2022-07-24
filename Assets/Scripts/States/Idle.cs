@@ -8,23 +8,22 @@ public class Idle : State
 
     public override void EnterState(StateManager npc)
     {
-        
+        Debug.Log("Entered Idle State");
     }
 
     public override void UpdateState(StateManager npc)
     {
-        if (canSeePlayer()){
+        if (npc.canSeePlayer()){
             npc.SwitchState(npc.chase);
         }
     }
 
     public override void OnCollisionEnter(StateManager npc, Collision collision)
     {
-
+        GameObject other = collision.gameObject;
+        if (other.CompareTag("Bullet")){
+            npc.SwitchState(npc.stunned);
+        }
     }
 
-    public bool canSeePlayer()
-    {
-        return true;
-    }
 }
