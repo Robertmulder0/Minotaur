@@ -4,16 +4,27 @@ using UnityEngine;
 
 public class Idle : State
 {
-    public bool isPlayerVisible;
-    public Chase chase;
+    public bool ifPlayerVisible;
 
-    public override State RunState()
+    public override void EnterState(StateManager npc)
     {
-        if (isPlayerVisible)
-        {
-            return chase;
-        } else {
-            return this;
+        
+    }
+
+    public override void UpdateState(StateManager npc)
+    {
+        if (canSeePlayer()){
+            npc.SwitchState(npc.chase);
         }
+    }
+
+    public override void OnCollisionEnter(StateManager npc, Collision collision)
+    {
+
+    }
+
+    public bool canSeePlayer()
+    {
+        return true;
     }
 }

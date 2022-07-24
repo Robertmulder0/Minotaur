@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class State : MonoBehaviour
+public abstract class State
 {
-    public abstract State RunState();
+    public abstract void EnterState(StateManager npc);
+
+    public abstract void UpdateState(StateManager npc);
+
+    public abstract void OnCollisionEnter(StateManager npc, Collision collision);
 }

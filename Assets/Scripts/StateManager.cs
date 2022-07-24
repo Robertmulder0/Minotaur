@@ -4,25 +4,36 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
-    [SerializeField]
     public State currentState;
-    // Update is called once per frame
-    void Update()
+    public Idle idle = new Idle();
+    public Chase chase = new Chase();
+    public Stunned stunned = new Stunned();
+
+    public float moveSpeed = 5.0f;
+    public bool isStunned;
+
+    public GameObject player;
+    
+    void Start()
     {
-        RunState();
+        currentState = idle;
+
+        currentState.EnterState(this);
     }
 
-    private void RunState()
+    void OnCollisionEnter(Collision collision)
     {
-        State nextState = null; //initialize null to stop errors
-        if (currentState != null)
-        {
-            nextState = currentState.RunState();
-        }
+        currentState.OnCollisionEnter(this, collision);
+    }
 
-        if (nextState != null)
-        {
-            currentState = nextState;
-        }
+    void Update()
+    {
+        currentState.UpdateState(this);
+    }
+
+    public void SwitchState(State state)
+    {
+        currentState = state;
+        state.EnterState(this);
     }
 }

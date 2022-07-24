@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Stunned : State
 {
-    public override State RunState()
+    public override void EnterState(StateManager npc)
     {
-        return this;
+        Debug.Log("Entered Stunned State");
+    }
+
+    public override void UpdateState(StateManager npc)
+    {
+
+    }
+
+    public override void OnCollisionEnter(StateManager npc, Collision collision)
+    {
+
     }
 }

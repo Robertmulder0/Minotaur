@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class Chase : State
 {
-    public bool isPlayerVisible;
-    public Idle idle;
-
-    public override State RunState()
+    public override void EnterState(StateManager npc)
     {
-        if (isPlayerVisible)
-        {
-            return this;
-        } else {
-            return idle;
+        Debug.Log("Entered chase state");
+    }
+
+    public override void UpdateState(StateManager npc)
+    {
+        npc.transform.position = Vector3.MoveTowards(npc.transform.position, npc.player.transform.position, npc.moveSpeed * Time.deltaTime);
+
+    }
+
+    public override void OnCollisionEnter(StateManager npc, Collision collision)
+    {
+        GameObject other = collision.gameObject;
+        if (other.CompareTag("Bullet")){
+            npc.SwitchState(npc.stunned);
         }
     }
 }
