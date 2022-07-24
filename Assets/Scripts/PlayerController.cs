@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour
 
     private void ShootGun() {
         //raycast to reticle to determine where to shoot shot
-        Debug.Log("shoot");
         RaycastHit hit;
         GameObject bullet = GameObject.Instantiate(bulletPrefab, slingTransform.position, Quaternion.identity, bulletParent);
         BulletController bulletController = bullet.GetComponent<BulletController>();
