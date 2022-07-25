@@ -47,11 +47,13 @@ public class Grid : MonoBehaviour
 
     public Node NodeFromWorldPosition(Transform worldPosition) 
     {
-        float xPoint = ((worldPosition.position.x + gridSize.x/2) / gridSize.x); // avoid out of range error
-        xPoint = Mathf.Clamp01(xPoint);
+        //grid ranges from (-150x,-150z to 150x, 150z)
+        //grid pos should = abs(x + 150) / grid size)
+        float xPoint = (worldPosition.position.x + (gridSize.x/2)) / gridSize.x; // avoid out of range error
+        //xPoint = Mathf.Clamp01(xPoint);
 
-        float yPoint = ((worldPosition.position.y + gridSize.y/2) / gridSize.y);
-        yPoint = Mathf.Clamp01(yPoint);
+        float yPoint = (worldPosition.position.y + (gridSize.y/2)) / gridSize.y;
+        //yPoint = Mathf.Clamp01(yPoint);
 
         int x = Mathf.RoundToInt((gridSizeX - 1) * xPoint);
         int y = Mathf.RoundToInt((gridSizeY - 1) * yPoint);
@@ -78,14 +80,11 @@ public class Grid : MonoBehaviour
             foreach (Node node in grid){
                 if (node.isWall){
                     Gizmos.color = Color.red;
+                } else if (FinalPath.Contains(node)){
+                    Gizmos.color = Color.green;
                 } else {
                     Gizmos.color = Color.white;
                 }
-
-                if (FinalPath != null){
-                    Gizmos.color = Color.green;
-                }
-
                 Gizmos.DrawCube(node.position, Vector3.one * (nodeDiameter - distance));
             }
         }

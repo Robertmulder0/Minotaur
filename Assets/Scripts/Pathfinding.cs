@@ -17,18 +17,25 @@ public class Pathfinding : MonoBehaviour
     void Update()
     {
         grid.FinalPath = FindPath(startPos, endPos);
+        //Debug.Log(grid.FinalPath.Count);
     }
 
     public List<Node> FindPath(Transform _startPos, Transform _endPos)
     {
         Node startNode = grid.NodeFromWorldPosition(_startPos);
+        //Debug.Log(_startPos.position);
+        Debug.Log("start node:" + startNode.gridX + ", " + startNode.gridY);
         Node endNode = grid.NodeFromWorldPosition(_endPos);
+        Debug.Log("end node:" + endNode.gridX + ", " + endNode.gridY);
+        //Debug.Log(_endPos.position);
+
+
 
         openList = new List<Node>() {startNode};
         closedList = new List<Node>();
 
-        for (int x = 0; x < grid.GetGridWidth(); x++) {
-            for (int y = 0; y < grid.GetGridHeight(); y++){
+        for (int x = 0; x < grid.gridSizeX; x++) {
+            for (int y = 0; y < grid.gridSizeY; y++){
                 Node pathNode = grid.GetGridNode(x, y);
                 pathNode.gCost = int.MaxValue;
                 pathNode.CalculateFCost();
@@ -43,6 +50,7 @@ public class Pathfinding : MonoBehaviour
         while (openList.Count > 0) {
             Node currentNode = GetLowestFCost(openList);
             if (currentNode == endNode){
+                //Debug.Log("end node x,y: " + endNode.gridX + ", " + endNode.gridY);
                 return CalculatePath(endNode);
             }
 
