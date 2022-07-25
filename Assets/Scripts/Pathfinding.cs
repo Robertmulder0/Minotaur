@@ -10,17 +10,16 @@ public class Pathfinding : MonoBehaviour
     private List<Node> openList;
     private List<Node> closedList;
 
-    private void Awake()
-    {
+    private void Awake(){
         grid = GetComponent<Grid>();
     }
 
-    private void Update()
+    void Update()
     {
-        FindPath(startPos.position, endPos.position);
+        grid.FinalPath = FindPath(startPos, endPos);
     }
 
-    private List<Node> FindPath(Vector3 _startPos, Vector3 _endPos)
+    public List<Node> FindPath(Transform _startPos, Transform _endPos)
     {
         Node startNode = grid.NodeFromWorldPosition(_startPos);
         Node endNode = grid.NodeFromWorldPosition(_endPos);
@@ -28,8 +27,8 @@ public class Pathfinding : MonoBehaviour
         openList = new List<Node>() {startNode};
         closedList = new List<Node>();
 
-        for (int x = 0; x < grid.gridSizeX; x++) {
-            for (int y = 0; y < grid.gridSizeY; y++){
+        for (int x = 0; x < grid.GetGridWidth(); x++) {
+            for (int y = 0; y < grid.GetGridHeight(); y++){
                 Node pathNode = grid.GetGridNode(x, y);
                 pathNode.gCost = int.MaxValue;
                 pathNode.CalculateFCost();
@@ -106,7 +105,7 @@ public class Pathfinding : MonoBehaviour
         int ix = Mathf.Abs(nodeA.gridX - nodeB.gridX);
         int iy = Mathf.Abs(nodeA.gridY - nodeB.gridY);
 
-        return Mathf.Abs(ix - iy);
+        return 10 * Mathf.Abs(ix - iy);
     }
 
     private Node GetLowestFCost(List<Node> nodeList) {

@@ -9,6 +9,8 @@ public class Grid : MonoBehaviour
     public Vector2 gridSize;
     public int gridSizeX;
     public int gridSizeY;
+    public int gridWidth;
+    public int gridHeight;
     public float nodeRadius;
     private float nodeDiameter;
     public float distance;
@@ -43,12 +45,12 @@ public class Grid : MonoBehaviour
 
     }
 
-    public Node NodeFromWorldPosition(Vector3 worldPosition) 
+    public Node NodeFromWorldPosition(Transform worldPosition) 
     {
-        float xPoint = ((worldPosition.x + gridSize.x/2) / gridSize.x); // avoid out of range error
+        float xPoint = ((worldPosition.position.x + gridSize.x/2) / gridSize.x); // avoid out of range error
         xPoint = Mathf.Clamp01(xPoint);
 
-        float yPoint = ((worldPosition.y + gridSize.y/2) / gridSize.y);
+        float yPoint = ((worldPosition.position.y + gridSize.y/2) / gridSize.y);
         yPoint = Mathf.Clamp01(yPoint);
 
         int x = Mathf.RoundToInt((gridSizeX - 1) * xPoint);
@@ -59,6 +61,14 @@ public class Grid : MonoBehaviour
 
     public Node GetGridNode(int x, int y){
         return grid[x, y];
+    }
+
+    public int GetGridWidth(){
+        return grid.GetLength(0);
+    }
+
+    public int GetGridHeight(){
+        return grid.GetLength(1);
     }
 
     private void OnDrawGizmos() //draw path for debuggging
