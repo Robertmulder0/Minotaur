@@ -23,13 +23,7 @@ public class Pathfinding : MonoBehaviour
     public List<Node> FindPath(Transform _startPos, Transform _endPos)
     {
         Node startNode = grid.NodeFromWorldPosition(_startPos);
-        //Debug.Log(_startPos.position);
-        Debug.Log("start node:" + startNode.gridX + ", " + startNode.gridY);
         Node endNode = grid.NodeFromWorldPosition(_endPos);
-        Debug.Log("end node:" + endNode.gridX + ", " + endNode.gridY);
-        //Debug.Log(_endPos.position);
-
-
 
         openList = new List<Node>() {startNode};
         closedList = new List<Node>();
@@ -50,7 +44,6 @@ public class Pathfinding : MonoBehaviour
         while (openList.Count > 0) {
             Node currentNode = GetLowestFCost(openList);
             if (currentNode == endNode){
-                //Debug.Log("end node x,y: " + endNode.gridX + ", " + endNode.gridY);
                 return CalculatePath(endNode);
             }
 
@@ -79,20 +72,23 @@ public class Pathfinding : MonoBehaviour
     private List<Node> GetNeighbors(Node currentNode){
         List<Node> Neighbors = new List<Node>();
 
-        if (currentNode.gridX - 1 >= 0){
-            Neighbors.Add(grid.GetGridNode(currentNode.gridX - 1, currentNode.gridY));
-        }
-        if (currentNode.gridX + 1 < grid.gridSizeX) {
-            Neighbors.Add(grid.GetGridNode(currentNode.gridX + 1, currentNode.gridY));
-        }
-        if (currentNode.gridY- 1 >= 0) {
-            Neighbors.Add(grid.GetGridNode(currentNode.gridX, currentNode.gridY - 1));
-        }
-        if (currentNode.gridY + 1 < grid.gridSizeY){
-            Neighbors.Add(grid.GetGridNode(currentNode.gridX, currentNode.gridY + 1));
+        if (currentNode.isWall == false){
+            if (currentNode.gridX - 1 >= 0){
+                Neighbors.Add(grid.GetGridNode(currentNode.gridX - 1, currentNode.gridY));
+            }
+            if (currentNode.gridX + 1 < grid.gridSizeX) {
+                Neighbors.Add(grid.GetGridNode(currentNode.gridX + 1, currentNode.gridY));
+            }
+            if (currentNode.gridY- 1 >= 0) {
+                Neighbors.Add(grid.GetGridNode(currentNode.gridX, currentNode.gridY - 1));
+            }
+            if (currentNode.gridY + 1 < grid.gridSizeY){
+                Neighbors.Add(grid.GetGridNode(currentNode.gridX, currentNode.gridY + 1));
+            }
         }
 
         return Neighbors;
+        
     }
 
     private List<Node> CalculatePath(Node endNode){

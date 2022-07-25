@@ -9,8 +9,6 @@ public class Grid : MonoBehaviour
     public Vector2 gridSize;
     public int gridSizeX;
     public int gridSizeY;
-    public int gridWidth;
-    public int gridHeight;
     public float nodeRadius;
     private float nodeDiameter;
     public float distance;
@@ -49,14 +47,11 @@ public class Grid : MonoBehaviour
     {
         //grid ranges from (-150x,-150z to 150x, 150z)
         //grid pos should = abs(x + 150) / grid size)
-        float xPoint = (worldPosition.position.x + (gridSize.x/2)) / gridSize.x; // avoid out of range error
-        //xPoint = Mathf.Clamp01(xPoint);
+        float xPoint = Mathf.Floor((worldPosition.position.x + (gridSize.x/2)) / nodeDiameter);
+        float yPoint = Mathf.Floor((worldPosition.position.z + (gridSize.y/2)) / nodeDiameter);
 
-        float yPoint = (worldPosition.position.y + (gridSize.y/2)) / gridSize.y;
-        //yPoint = Mathf.Clamp01(yPoint);
-
-        int x = Mathf.RoundToInt((gridSizeX - 1) * xPoint);
-        int y = Mathf.RoundToInt((gridSizeY - 1) * yPoint);
+        int x = Mathf.RoundToInt(xPoint);
+        int y = Mathf.RoundToInt(yPoint);
 
         return grid[x, y];
     }
