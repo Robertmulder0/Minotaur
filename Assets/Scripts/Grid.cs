@@ -46,7 +46,6 @@ public class Grid : MonoBehaviour
     public Node NodeFromWorldPosition(Transform worldPosition) 
     {
         //grid ranges from (-150x,-150z to 150x, 150z)
-        //grid pos should = abs(x + 150) / grid size)
         float xPoint = Mathf.Floor((worldPosition.position.x + (gridSize.x/2)) / nodeDiameter);
         float yPoint = Mathf.Floor((worldPosition.position.z + (gridSize.y/2)) / nodeDiameter);
 
@@ -66,6 +65,10 @@ public class Grid : MonoBehaviour
 
     public int GetGridHeight(){
         return grid.GetLength(1);
+    }
+
+    public List<Node> GetFinalPath(){
+        return FinalPath;
     }
 
     private void OnDrawGizmos() //draw path for debuggging

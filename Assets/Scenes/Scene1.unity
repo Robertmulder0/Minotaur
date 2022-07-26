@@ -541,8 +541,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591407949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 2.5, z: -95}
-  m_LocalScale: {x: 19.5, y: 5, z: 9.5}
+  m_LocalPosition: {x: 0, y: 1, z: -95}
+  m_LocalScale: {x: 19.5, y: 2, z: 9.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -746,7 +746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1389347118389027733, guid: 28630968ba09bf048a131757e09e901a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -108.56135
+      value: -107.67135
       objectReference: {fileID: 0}
     - target: {fileID: 1389347118389027733, guid: 28630968ba09bf048a131757e09e901a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -877,7 +877,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789982788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 1, z: -102.77}
+  m_LocalPosition: {x: -2, y: 1, z: -101.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1107,7 +1107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.02617695, y: 0, z: 0, w: 0.99965733}
-  m_LocalPosition: {x: -1.0514957, y: 2.3436968, z: -108.56135}
+  m_LocalPosition: {x: -1.0514957, y: 2.3436968, z: -107.67135}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1424,6 +1424,8 @@ MonoBehaviour:
   moveSpeed: 5
   isStunned: 0
   player: {fileID: 789982788}
+  gridManager: {fileID: 1755570069}
+  patrolPoint: {fileID: 622836911}
   material:
   - {fileID: 2100000, guid: 162b5622665c47f469c3a8a26f7ce642, type: 2}
   - {fileID: 2100000, guid: 93f744838a381ee4ba57df2c57cb8e33, type: 2}
@@ -1608,7 +1610,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1755570069}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1627,6 +1629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f92fc97468d0d4eb7cc68e52d478b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 0}
   startPos: {fileID: 1342257768}
   endPos: {fileID: 622836912}
 --- !u!1 &1774683059 stripped

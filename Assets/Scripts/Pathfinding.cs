@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class Pathfinding : MonoBehaviour
 {
-    Grid grid;
+    public Grid grid;
     public Transform startPos;
     public Transform endPos;
     private List<Node> openList;
     private List<Node> closedList;
 
-    private void Awake(){
+    public Node nextNode;
+
+    private void Awake()
+    {
         grid = GetComponent<Grid>();
     }
 
     void Update()
     {
         grid.FinalPath = FindPath(startPos, endPos);
-        //Debug.Log(grid.FinalPath.Count);
+        if (grid.FinalPath.Count > 1){
+            nextNode = grid.FinalPath[1];
+        }
     }
 
     public List<Node> FindPath(Transform _startPos, Transform _endPos)

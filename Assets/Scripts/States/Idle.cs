@@ -15,6 +15,8 @@ public class Idle : State
     {
         if (npc.canSeePlayer()){
             npc.SwitchState(npc.chase);
+        } else {
+            npc.SwitchState(npc.patrol);
         }
     }
 

@@ -8,11 +8,14 @@ public class StateManager : MonoBehaviour
     public Idle idle = new Idle();
     public Chase chase = new Chase();
     public Stunned stunned = new Stunned();
+    public Patrol patrol = new Patrol();
 
     public float moveSpeed = 5.0f;
     public bool isStunned;
 
     public GameObject player;
+    public GameObject gridManager;
+    public GameObject patrolPoint;
 
     public Material[] material;
     Renderer rend;
@@ -26,6 +29,7 @@ public class StateManager : MonoBehaviour
         rend = GetComponent<Renderer>();
         rend.enabled = true;
         rend.sharedMaterial = material[0];
+
     }
 
     void OnCollisionEnter(Collision collision)
