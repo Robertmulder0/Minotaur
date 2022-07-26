@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class Patrol : State
 {   
-    public GameObject [] patrolPoints;
     public Node nextNode;
+    private GameObject[] patrolPointNodes;
 
     public override void EnterState(StateManager npc)
     {
-        
+        Debug.Log("Entered Patrol State");
     }
 
      public override void UpdateState(StateManager npc)
     {   
+        if (npc.canSeePlayer()){
+            npc.SwitchState(npc.chase);
+        }
+
+        //pathfind towards patrol point
         nextNode = npc.gridManager.GetComponent<Pathfinding>().nextNode;
         npc.transform.position = Vector3.MoveTowards(npc.transform.position, nextNode.position, npc.moveSpeed * Time.deltaTime);
+        
+        //find random position for patrol point
+        patrolPointNodes = npc.patrolPointNodes;
+        if (npc.transform.position == npc.patrolPoint.transform.position){
+            int randomNode = Random.Range(0, patrolPointNodes.Length);
+            npc.patrolPoint.transform.position = patrolPointNodes[Random.Range(0, randomNode)].transform.position;
+        }
     }
 
     public override void OnCollisionEnter(StateManager npc, Collision collision)

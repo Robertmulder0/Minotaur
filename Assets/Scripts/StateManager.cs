@@ -16,6 +16,7 @@ public class StateManager : MonoBehaviour
     public GameObject player;
     public GameObject gridManager;
     public GameObject patrolPoint;
+    public GameObject[] patrolPointNodes = new GameObject[6];
 
     public Material[] material;
     Renderer rend;
