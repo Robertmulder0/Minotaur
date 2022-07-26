@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 10f;
 
+    public int slingShotAmmo;
+    public int hp;
+
     private InputAction moveAction;
     private InputAction jumpAction;
     private InputAction shootAction;
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
         leftMouseClick = new InputAction(binding: "<Mouse>/leftButton");
         leftMouseClick.performed += ctx => ShootGun();
         leftMouseClick.Enable();
+        hp = 1;
     }
 
     private void onEnable() 
@@ -57,17 +61,20 @@ public class PlayerController : MonoBehaviour
     }
 
     private void ShootGun() {
-        //raycast to reticle to determine where to shoot shot
-        RaycastHit hit;
-        GameObject bullet = GameObject.Instantiate(bulletPrefab, slingTransform.position, Quaternion.identity, bulletParent);
-        BulletController bulletController = bullet.GetComponent<BulletController>();
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity)) 
-        {
-            bulletController.target = hit.point;
-            bulletController.hit = true;
-        } else {
-            bulletController.target = cameraTransform.position + cameraTransform.forward * 25f;
-            bulletController.hit = false;
+        if (slingShotAmmo > 0){
+            //raycast to reticle to determine where to shoot shot
+            RaycastHit hit;
+            GameObject bullet = GameObject.Instantiate(bulletPrefab, slingTransform.position, Quaternion.identity, bulletParent);
+            BulletController bulletController = bullet.GetComponent<BulletController>();
+            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity)) 
+            {
+                bulletController.target = hit.point;
+                bulletController.hit = true;
+            } else {
+                bulletController.target = cameraTransform.position + cameraTransform.forward * 25f;
+                bulletController.hit = false;
+            }
+            slingShotAmmo--;
         }
     }
 
