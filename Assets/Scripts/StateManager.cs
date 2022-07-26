@@ -9,6 +9,7 @@ public class StateManager : MonoBehaviour
     public Chase chase = new Chase();
     public Stunned stunned = new Stunned();
     public Patrol patrol = new Patrol();
+    public FindPlayer findPlayer = new FindPlayer();
 
     public float moveSpeed = 5.0f;
     public bool isStunned;
@@ -16,7 +17,7 @@ public class StateManager : MonoBehaviour
     public GameObject player;
     public GameObject gridManager;
     public GameObject patrolPoint;
-    public GameObject[] patrolPointNodes = new GameObject[6];
+    public GameObject[] patrolPointNodes = new GameObject[10];
 
     public Material[] material;
     Renderer rend;

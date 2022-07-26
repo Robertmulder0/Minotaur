@@ -45,7 +45,7 @@ public class Grid : MonoBehaviour
 
     public Node NodeFromWorldPosition(Transform worldPosition) 
     {
-        //grid ranges from (-150x,-150z to 150x, 150z)
+        //grid ranges from (-100x,-100z to 100x, 100z)
         float xPoint = Mathf.Floor((worldPosition.position.x + (gridSize.x/2)) / nodeDiameter);
         float yPoint = Mathf.Floor((worldPosition.position.z + (gridSize.y/2)) / nodeDiameter);
 

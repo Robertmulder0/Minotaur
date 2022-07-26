@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Chase : State
 {
+    Vector3 playerPos;
     public override void EnterState(StateManager npc)
     {
         Debug.Log("Entered chase state");
@@ -11,10 +12,16 @@ public class Chase : State
 
     public override void UpdateState(StateManager npc)
     {
-        npc.transform.position = Vector3.MoveTowards(npc.transform.position, npc.player.transform.position, npc.moveSpeed * Time.deltaTime);
+        playerPos = npc.player.transform.position;
+        playerPos.y += 1.5f;
+
+        npc.transform.position = Vector3.MoveTowards(npc.transform.position, playerPos, npc.moveSpeed * Time.deltaTime);
+        
+        //make minotaur face direction of movement
+        npc.transform.LookAt(playerPos);
 
         if (!npc.canSeePlayer()){
-            npc.SwitchState(npc.idle);
+            npc.SwitchState(npc.findPlayer);
         }
     }
 

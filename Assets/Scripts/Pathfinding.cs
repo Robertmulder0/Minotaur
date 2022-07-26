@@ -9,6 +9,8 @@ public class Pathfinding : MonoBehaviour
     public Transform endPos;
     private List<Node> openList;
     private List<Node> closedList;
+    public Node startNode;
+    public Node endNode;
 
     public Node nextNode;
 
@@ -27,8 +29,8 @@ public class Pathfinding : MonoBehaviour
 
     public List<Node> FindPath(Transform _startPos, Transform _endPos)
     {
-        Node startNode = grid.NodeFromWorldPosition(_startPos);
-        Node endNode = grid.NodeFromWorldPosition(_endPos);
+        startNode = grid.NodeFromWorldPosition(_startPos);
+        endNode = grid.NodeFromWorldPosition(_endPos);
 
         openList = new List<Node>() {startNode};
         closedList = new List<Node>();

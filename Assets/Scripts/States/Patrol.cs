@@ -12,15 +12,20 @@ public class Patrol : State
         Debug.Log("Entered Patrol State");
     }
 
-     public override void UpdateState(StateManager npc)
+    public override void UpdateState(StateManager npc)
     {   
         if (npc.canSeePlayer()){
             npc.SwitchState(npc.chase);
         }
 
         //pathfind towards patrol point
-        nextNode = npc.gridManager.GetComponent<Pathfinding>().nextNode;
-        npc.transform.position = Vector3.MoveTowards(npc.transform.position, nextNode.position, npc.moveSpeed * Time.deltaTime);
+        if (nextNode != npc.gridManager.GetComponent<Pathfinding>().endNode) {
+            nextNode = npc.gridManager.GetComponent<Pathfinding>().nextNode;
+            npc.transform.position = Vector3.MoveTowards(npc.transform.position, nextNode.position, npc.moveSpeed * Time.deltaTime);
+            npc.transform.LookAt(nextNode.position);
+        } else {
+            npc.transform.position = Vector3.MoveTowards(npc.transform.position, npc.patrolPoint.transform.position, npc.moveSpeed * Time.deltaTime);
+        }
         
         //find random position for patrol point
         patrolPointNodes = npc.patrolPointNodes;

@@ -12,7 +12,7 @@ public class Stunned : State
     {
         Debug.Log("Entered Stunned State");
         npc.SwitchMat();
-        stunTimer = 15.0f;
+        stunTimer = 7.0f;
     }
 
     public override void UpdateState(StateManager npc)
