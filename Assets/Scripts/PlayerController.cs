@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
@@ -26,12 +27,14 @@ public class PlayerController : MonoBehaviour
     private float rotationSpeed = 10f;
 
     public int slingShotAmmo;
-    public int hp;
+    public TextMeshProUGUI ammoText;
 
     private InputAction moveAction;
     private InputAction jumpAction;
     private InputAction shootAction;
     private InputAction leftMouseClick;
+
+    public GameController gameController;
 
     private void Awake()
     {
@@ -43,7 +46,6 @@ public class PlayerController : MonoBehaviour
         leftMouseClick = new InputAction(binding: "<Mouse>/leftButton");
         leftMouseClick.performed += ctx => ShootGun();
         leftMouseClick.Enable();
-        hp = 1;
     }
 
     private void onEnable() 
@@ -106,5 +108,18 @@ public class PlayerController : MonoBehaviour
         float targetAngle = cameraTransform.eulerAngles.y;
         Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        //update ammo text
+        ammoText.text = "Ammo: " + slingShotAmmo;
+
+        //freeze if game over
+        if (gameController.playerLost || gameController.gameWon){
+            Disable();
+        }
+    }
+
+    private void Disable()
+    {
+        enabled = false;
     }
 }

@@ -19,6 +19,8 @@ public class StateManager : MonoBehaviour
     public GameObject patrolPoint;
     public GameObject[] patrolPointNodes = new GameObject[10];
 
+    public GameController gameController;
+
     public Material[] material;
     Renderer rend;
     
@@ -42,6 +44,11 @@ public class StateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+
+        //if game ends, disable
+        if (gameController.playerLost || gameController.gameWon) {
+            Disable();
+        }
     }
 
     public void SwitchState(State state)
@@ -71,6 +78,10 @@ public class StateManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    private void Disable() {
+        enabled = false;
     }
 
 }

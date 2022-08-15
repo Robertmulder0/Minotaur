@@ -32,6 +32,11 @@ public class Patrol : State
         if (npc.transform.position == npc.patrolPoint.transform.position){
             int randomNode = Random.Range(0, patrolPointNodes.Length);
             npc.patrolPoint.transform.position = patrolPointNodes[Random.Range(0, randomNode)].transform.position;
+            //if next patrol point position is not within 75 units of player, reroll
+            while (Vector3.Distance(npc.patrolPoint.transform.position, npc.player.transform.position) > 75){
+                randomNode = Random.Range(0, patrolPointNodes.Length);
+                npc.patrolPoint.transform.position = patrolPointNodes[Random.Range(0, randomNode)].transform.position;
+            }
         }
     }
 

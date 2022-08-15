@@ -5,16 +5,10 @@ using UnityEngine;
 public class GoalManager : MonoBehaviour
 {
     public GameObject player;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool hasBeenEntered;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void Start(){
+        hasBeenEntered = false;
     }
 
     void OnTriggerEnter(Collider collision)
@@ -22,6 +16,7 @@ public class GoalManager : MonoBehaviour
         GameObject other = collision.gameObject;
         if (other.CompareTag("Player")){
             Debug.Log("Player entered end goal");
+            hasBeenEntered = true;
         }
     }
 }
