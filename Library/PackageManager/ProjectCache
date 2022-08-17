@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637942018794262964
-    m_Hash: 848009639
+      ticks: 637962991270523207
+    m_Hash: 2957300834
   m_LockFileStatus:
     m_FilePath: C:/Users/mulderr/Documents/GitHub/Minotaur/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637942018794322805
-    m_Hash: 654830277
+      ticks: 637962991270563106
+    m_Hash: 614872611
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -3331,12 +3331,14 @@ m_ResolvedPackages:
     - 1.4.0
     - 1.4.1
     - 1.4.2
+    - 1.4.3
     compatible:
     - 1.3.1
     - 1.3.2
     - 1.4.0
     - 1.4.1
     - 1.4.2
+    - 1.4.3
     verified: 1.3.2
   dependencies:
   - name: com.unity.modules.unitywebrequest
